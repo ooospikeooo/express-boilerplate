@@ -5,7 +5,7 @@ services:
     container_name: node-test
     build: .
     ports:
-      - "3000:3000"
+      - "4000:4000"
     volumes:
       - "./docker-bind/logs:/home/node-test/logs"
     # entrypoint: ["/bin/bash"]
