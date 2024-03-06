@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: test
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - "./docker-bind/logs:/home/node-test/logs"
+    # entrypoint: ["/bin/bash"]
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        /home/node-test/entrypoint.sh
+    tty: true
