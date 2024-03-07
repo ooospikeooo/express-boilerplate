@@ -3,14 +3,21 @@ version: "3.9"
 services:
   app:
     container_name: node-test
-    build: .
+    build:
+      context: .
+      args:
+      - WORKDIR=${WORKDIR}
     ports:
       - "4000:4000"
     volumes:
-      - "./docker-bind/logs:/home/node-test/logs"
+      - "./docker-bind/logs:${WORKDIR}/logs"
+    # env_file:
+    #   - path: .docker.env
+    #     required: true
+    
     # entrypoint: ["/bin/bash"]
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
-        /home/node-test/entrypoint.sh
+        ${WORKDIR}/entrypoint.sh
     tty: true

@@ -1,6 +1,7 @@
 FROM node:20.11.1
 
-WORKDIR /home/node-test
+ARG WORKDIR
+WORKDIR ${WORKDIR}
 COPY . ./
 
 RUN npm install
