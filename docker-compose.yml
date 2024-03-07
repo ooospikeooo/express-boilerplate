@@ -11,12 +11,14 @@ services:
       - "4000:4000"
     volumes:
       - "./docker-bind/logs:${WORKDIR}/logs"
+    environment:
+      - TZ = "Asia/Seoul"
     # env_file:
     #   - path: .docker.env
     #     required: true
-    
+
     # entrypoint: ["/bin/bash"]
-    entrypoint: ["/bin/bash", "-c"]
+    entrypoint: ["/bin/sh", "-c"]
     command:
       - |
         ${WORKDIR}/entrypoint.sh

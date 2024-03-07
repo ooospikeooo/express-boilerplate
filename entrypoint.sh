@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 ls -al
-npm run prod
+npm run prod.pm2
