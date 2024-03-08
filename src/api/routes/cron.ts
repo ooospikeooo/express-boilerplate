@@ -13,10 +13,24 @@ export default (app: Router) => {
         try {
             const cronHandler: CronHandler = Container.get('cronHandler');
             cronHandler.start();
-            return res.status(201).send("cronJob started.");
+            res.status(201).send("cronJob started.");
         } catch (e) {
             Logger.error('🔥 Error attaching user to req: %o', e);
-            return next(e);
+            next(e);
         }
+    });
+
+    route.get('/change', function (req, res) {
+        const Logger: Logger = Container.get('logger');
+        const cronHandler: CronHandler = Container.get('cronHandler');
+        let time='*/5 * * * * *';
+        cronHandler.setCronPattern(time);
+        res.send("cron time change.");
+    })
+    
+    route.get('/time', function (req, res) {
+        const Logger: Logger = Container.get('logger');
+        const cronHandler: CronHandler = Container.get('cronHandler');
+        res.send(cronHandler.getCronPattern());
     });
 };

@@ -6,10 +6,11 @@ export default () => {
     try {
         const cronhandlerInstance = new CronHandler('*/10 * * * * *', function () {
             const d = new Date();
-            console.log('cron job is called :', d);
+            LoggerInstance.info('cron job is called :', d);
         });
 
         Container.set('cronHandler', cronhandlerInstance);
+        Container.set('logger', LoggerInstance);
     } catch (e) {
         LoggerInstance.error('🔥 Error on dependency injector loader: %o', e);
         throw e;

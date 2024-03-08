@@ -52,12 +52,12 @@ export default ({ app }: { app: express.Application }) => {
     /// catch 404 and forward to error handler
     app.use((req: Request, res: Response, next) => {
         const err = new ResponseError(404, 'Not Found');
-        Logger.error(err);
         next(err);
     });
 
     /// error handlers
     app.use((err: ResponseError, req: Request, res: Response, next: NextFunction) => {
+        Logger.error("(default)", err);
         /**
          * Handle 401 thrown by express-jwt library
          */

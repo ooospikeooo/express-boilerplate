@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import expressLoader from './express';
-// import dependencyInjectorLoader from './dependencyInjector';
+import dependencyInjectorLoader from './dependencyInjector';
 // import mongooseLoader from './mongoose';
 // import jobsLoader from './jobs';
 import Logger from './logger';
@@ -34,7 +34,8 @@ export default async ({ expressApp } : { expressApp : Application }) => {
 //       // whateverModel
 //     ],
 //   });
-//   Logger.info('✌️ Dependency Injector loaded');
+  await dependencyInjectorLoader();
+  Logger.info('✌️ Dependency Injector loaded');
 
 //   await jobsLoader({ agenda });
 //   Logger.info('✌️ Jobs loaded');
