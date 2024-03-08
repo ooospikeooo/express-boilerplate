@@ -29,4 +29,8 @@ export default {
     api: {
         prefix: '/api',
     },
+    path: {
+        root: path.resolve(),
+        assets: path.resolve("./public/assets")
+    }
 };

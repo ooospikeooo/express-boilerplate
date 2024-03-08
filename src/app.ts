@@ -19,6 +19,7 @@ async function startServer() {
         Logger.info(`
         ################################################
         🛡️  node_env : ${config.node_env} 🛡️
+        🛡️  root_dir : ${config.path.root} 🛡️
         🛡️  Server listening on port: ${config.port} 🛡️
         🛡️  log_dir : ${config.logs.dir} 🛡️
         ################################################
