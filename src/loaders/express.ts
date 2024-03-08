@@ -2,6 +2,7 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 // import { OpticMiddleware } from '@useoptic/express-middleware';
 import routes from '@/api';
 import config from '@/config';
+import Logger from './logger';
 
 class ResponseError extends Error {
     status: number;
@@ -51,6 +52,7 @@ export default ({ app }: { app: express.Application }) => {
     /// catch 404 and forward to error handler
     app.use((req: Request, res: Response, next) => {
         const err = new ResponseError(404, 'Not Found');
+        Logger.error(err);
         next(err);
     });
 
@@ -67,6 +69,7 @@ export default ({ app }: { app: express.Application }) => {
         }
         return next(err);
     });
+
     app.use((err: ResponseError, req: Request, res: Response, next: NextFunction) => {
         res.status(err.status || 500);
         res.json({

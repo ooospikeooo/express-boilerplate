@@ -3,11 +3,13 @@ import winstonDaily from 'winston-daily-rotate-file';
 import config from '@/config'
 
 const logDir = config.logs.dir; // log가 저장될 디렉토리
-const { combine, timestamp, printf } = winston.format;
+const { combine, timestamp, errors, printf } = winston.format;
 
 // Define log format
 const logFormat = printf(info => {
-    return `${info.timestamp} | ${info.level} | ${info.message}`;
+    if(info.stack==null)
+        return `${info.timestamp} | ${info.level} | ${info.message}`;
+    return `${info.timestamp} | ${info.level} | ${info.message} | ${info.stack}`;
 });
 
 /*
@@ -16,6 +18,7 @@ const logFormat = printf(info => {
  */
 const LoggerInstance = winston.createLogger({
     format: combine(
+        errors({stack: true}),
         timestamp({
             format: 'YYYY-MM-DD HH:mm:ss a',
         }),
